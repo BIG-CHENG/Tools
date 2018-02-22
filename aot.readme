@@ -1,0 +1,104 @@
+#1. AOT compiler test process:
+
+#1.1. download tensorflow 1.6-rc1
+
+# from https://github.com/tensorflow/tensorflow/tree/v1.6.0-rc1 download tensorflow-1.6.0-rc1.zip
+unzip tensorflow-1.6.0-rc1.zip
+
+
+#1.2. git initlization
+
+cd tensorflow-1.6.0-rc1
+git init
+git add .
+git commit -m "init from tensorflow-1.6.0-rc1"
+
+
+#1.3. tensorflow config
+
+./configure
+#generate -> .tf_configure.bazelrc
+
+
+#1.4. compile aot/tf-compile
+
+bazel build //tensorflow/compiler/aot:tfcompile
+
+(~ 1 hr)
+
+
+#1.5. gen aot unit test
+
+bazel build //tensorflow/compiler/aot/tests:tfcompile_test
+
+
+(~ 1 hr)
+
+
+#1.6. run test
+
+bazel-bin/tensorflow/compiler/aot/tests/tfcompile_test
+
+Running main() from test_main.cc
+[==========] Running 12 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 12 tests from TFCompileTest
+[ RUN      ] TFCompileTest.Add
+[       OK ] TFCompileTest.Add (0 ms)
+[ RUN      ] TFCompileTest.Add_SetArg
+[       OK ] TFCompileTest.Add_SetArg (0 ms)
+[ RUN      ] TFCompileTest.AddWithCkpt
+[       OK ] TFCompileTest.AddWithCkpt (0 ms)
+[ RUN      ] TFCompileTest.AddWithCkptSaver
+[       OK ] TFCompileTest.AddWithCkptSaver (0 ms)
+[ RUN      ] TFCompileTest.Gather
+[       OK ] TFCompileTest.Gather (0 ms)
+[ RUN      ] TFCompileTest.MatMul2
+[       OK ] TFCompileTest.MatMul2 (0 ms)
+[ RUN      ] TFCompileTest.MatMul2_SetArg
+[       OK ] TFCompileTest.MatMul2_SetArg (0 ms)
+[ RUN      ] TFCompileTest.MatMulAndAdd1
+[       OK ] TFCompileTest.MatMulAndAdd1 (1 ms)
+[ RUN      ] TFCompileTest.Function
+[       OK ] TFCompileTest.Function (0 ms)
+[ RUN      ] TFCompileTest.Splits
+[       OK ] TFCompileTest.Splits (0 ms)
+[ RUN      ] TFCompileTest.LookupNameIndex
+[       OK ] TFCompileTest.LookupNameIndex (0 ms)
+[ RUN      ] TFCompileTest.ProgramShape
+[       OK ] TFCompileTest.ProgramShape (0 ms)
+[----------] 12 tests from TFCompileTest (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 12 tests from 1 test case ran. (1 ms total)
+[  PASSED  ] 12 tests.
+
+
+
+#2 build an aot-compiled program
+
+#2.1 prepare pb
+
+cd tensorflow/compiler/aot/tests/
+#edit make_test_graphs.py (add where pb copy from)
+
+
+#2.2 write cc
+
+#edit ns1x.cc
+
+
+#2.3 compile
+
+bazel build //tensorflow/compiler/aot/tests:ns1x
+
+
+#2.3 run binary
+bazel-bin/tensorflow/compiler/aot/tests/ns1x
+
+
+
+
+
+
+
