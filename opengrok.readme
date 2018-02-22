@@ -48,8 +48,23 @@ cd opengrok-1.1-rc20/bin/
 
 # browser src in http://127.0.0.1:8090/source
 
+
+## example:
+
 big@BIGPC2016:~/sw/server2$ cd opengrok-1.1-rc20/bin/
 big@BIGPC2016:~/sw/server2/opengrok-1.1-rc20/bin$ ./OpenGrok index
 Loading the default instance configuration ...
   Creating default /var/opengrok/logging.properties ... 
 WARNING: Can't find distribution logging configuration (/home/big/sw/server2/opengrok-1.1-rc20/bin/../lib/../doc/) to install as default logging configuration (/var/opengrok/logging.properties)
+big@BIGPC2016:~/sw/server2/opengrok-1.1-rc20/bin$ ./OpenGrok deploy
+Loading the default instance configuration ...
+Installing /home/big/sw/server2/opengrok-1.1-rc20/bin/../lib/source.war to /var/lib/tomcat8/webapps ...
+
+Start your application server (Tomcat),  if it is not already
+running, or wait until it loads the just installed web  application.
+
+OpenGrok should be available on <HOST>:<PORT>/source
+  where HOST and PORT are configured in Tomcat.
+
+
+
