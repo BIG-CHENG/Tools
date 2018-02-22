@@ -1,0 +1,49 @@
+## BIG CHENG, 2018/02/07, init
+## BIG CHENG, 2018/02/22, revision 1
+
+#0. This readme help to provide the info about how to using "virtualenv"
+#0.1 "virtualenv" is a virtual env to handle python related env.
+
+
+#1. create a virtual env
+
+cd .virtualenv  ## go to a directory where the new virtual env will be created
+virtualenv tf6  ## create a virtual env named "tf6"
+
+
+#1.1 enter a virtual env
+
+source .virtualenv/tf6/bin/activate
+## if successful, a header such as "(tf6)" is appeared
+
+#1.2 exit a virtual env
+
+deactive   ## simple one command to exit
+
+
+#1.9 destroy a virtual env 
+
+# just simple remove the directory created by command "virtualenv"
+
+
+
+#2 python package management
+
+#2.1 install python package via virtual env
+
+pip install tensorflow
+
+
+#2.2 extract installed package
+
+pip freeze > requirements.txt
+
+
+#2.3 install required packages from a text file
+
+pip install -r requirements.txt
+
+
+
+
+
